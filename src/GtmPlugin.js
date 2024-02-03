@@ -26,6 +26,14 @@ export default class AnalyticsPlugin {
     pluginConfig.debug = val
   }
 
+  hasElementId() {
+    return typeof pluginConfig.elementId === 'string'
+  }
+
+  getElementId() {
+    return pluginConfig.elementId
+  }
+
   trackView(screenName, path) {
     if (inBrowser && pluginConfig.enabled) {
       logDebug('Dispatching TrackView', { screenName, path })

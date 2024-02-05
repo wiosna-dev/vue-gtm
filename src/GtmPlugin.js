@@ -14,7 +14,7 @@ export default class AnalyticsPlugin {
     pluginConfig.enabled = val
 
     if (inBrowser && !!val && !hasScript()) {
-      loadScript(pluginConfig.id)
+      loadScript(pluginConfig.id, pluginConfig.elementId, this.getNonce())
     }
   }
 
@@ -32,6 +32,37 @@ export default class AnalyticsPlugin {
 
   getElementId() {
     return pluginConfig.elementId
+  }
+
+  hasNonceContainerAttributeSet() {
+    return typeof pluginConfig.nonceContainerAttribute === 'string'
+  }
+
+  getNonceContainerAttribute() {
+    return pluginConfig.nonceContainerAttribute
+  }
+
+  hasNonceContainerIdSet() {
+    return typeof pluginConfig.nonceContainerId === 'string'
+  }
+
+  getNonceContainerId() {
+    return pluginConfig.nonceContainerId
+  }
+
+  getNonce() {
+    if (!this.hasNonceContainerIdSet() || !this.hasNonceContainerAttributeSet()) {
+      return '';
+    }
+
+    const containerId = this.getNonceContainerId();
+    let element = document.getElementById(containerId);
+
+    if (!element) {
+      return '';
+    }
+
+    return element.getAttribute(this.getNonceContainerAttribute());
   }
 
   trackView(screenName, path) {

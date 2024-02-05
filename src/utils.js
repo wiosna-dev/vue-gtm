@@ -13,8 +13,10 @@ export const logDebug = function (message) {
 /**
  * Load GTM script tag
  * @param {String}  id  GTM ID
+ * @param {String}  elementId  script tag id attribute
+ * @param {String}  nonce  Nonce
  */
-export const loadScript = function (id, elementId) {
+export const loadScript = function (id, elementId, nonce) {
   const win    = window,
         doc    = document,
         script = doc.createElement('script'),
@@ -36,6 +38,10 @@ export const loadScript = function (id, elementId) {
 
   if (elementId) {
     script.id = elementId
+  }
+
+  if (nonce) {
+    script.setAttribute('nonce', nonce);
   }
 
   doc.body.appendChild(script)

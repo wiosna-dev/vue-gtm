@@ -16,6 +16,8 @@ const install = function (Vue, initConf = {}) {
   pluginConfig.debug = initConf.debug
   pluginConfig.enabled = initConf.enabled
   pluginConfig.elementId = initConf.elementId
+  pluginConfig.nonceContainerId = initConf.nonceContainerId
+  pluginConfig.nonceContainerAttribute = initConf.nonceContainerAttribute
 
   // Handle vue-router if defined
   if (initConf.vueRouter) {
@@ -27,7 +29,7 @@ const install = function (Vue, initConf = {}) {
 
   // Load GTM script when enabled
   if (pluginConfig.enabled) {
-    loadScript(initConf.id, initConf.elementId);
+    loadScript(initConf.id, initConf.elementId, Vue.prototype.$gtm.getNonce());
   }
 }
 

@@ -38,6 +38,7 @@ const router = new VueRouter({ routes, mode, linkActiveClass });
 Vue.use(VueGtm, {
   id: 'GTM-xxxxxxx', // Your GTM ID
   enabled: true, // defaults to true. Plugin can be disabled by setting this to false for Ex: enabled: !!GDPR_Cookie (optional)
+  elementId: 'gtm', // ID attribute of script tag
   debug: true, // Whether or not display console logs debugs (optional)
   vueRouter: router, // Pass the router instance to automatically sync with router (optional)
   ignoredViews: ['homepage'] // If router, you can exclude some routes name (case insensitive) (optional)
